@@ -1,18 +1,24 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import NoProfile from '../assets/img/black-bird.jpeg';
+import Me from '../assets/img/white-bird.jpeg';
 
-const Chat = () => {
+const Chat = (props) => {
+  const isQuestion = props.type === 'question';
+  const classes = isQuestion ? 'p-chat__row' : 'p-chat__reverse';
+
   return (
-    <ListItem>
+    <ListItem className={classes}>
       <ListItemAvatar>
-        <Avatar alt="icon" src="/static/images/avatar/1.jpg" />
+        {isQuestion ? (
+          <Avatar alt="icon" src={Me} />
+        ) : (
+          <Avatar alt="icon" src={NoProfile} />
+        )}
       </ListItemAvatar>
-      <diV className="p-chat__bubble">ダミーだよ</diV>
+      <diV className="p-chat__bubble">{props.text}</diV>
     </ListItem>
   );
 };
