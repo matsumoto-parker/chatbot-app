@@ -6,10 +6,14 @@ const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-const Answer = () => {
+const Answer = (props) => {
   // const classes = useStyles();
 
-  return <Button variant="contained">Default</Button>;
+  return (
+    <Button variant="contained" color="secondary">
+      {props.content}
+    </Button>
+  );
 };
 
 export default Answer;
