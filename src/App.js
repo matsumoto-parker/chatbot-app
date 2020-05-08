@@ -15,15 +15,42 @@ class App extends React.Component {
     };
   }
 
-  initAnswer = () => {
-    const initDataset = this.state.dataset[this.state.currentId];
-    const initAnswers = initDataset.answers;
+  displayNextQuestion = (nextQuestionId) => {
+    const chats = this.state.chats;
+    chats.push({
+      text: this.state.dataset[nextQuestionId].question,
+      type: 'question',
+    });
 
-    this.setState({ answers: initAnswers });
+    this.setState({
+      chats: chats,
+      currentId: nextQuestionId,
+      answers: this.state.dataset[nextQuestionId].answers,
+    });
+  };
+
+  selectAnswer = (selectedAnswer, nextQuestionId) => {
+    switch (true) {
+      case nextQuestionId === 'init':
+        this.displayNextQuestion(nextQuestionId);
+        break;
+      default:
+        const chats = this.state.chats;
+        chats.push({
+          text: selectedAnswer,
+          type: 'answer',
+        });
+
+        this.setState({ chats: chats });
+
+        this.displayNextQuestion(nextQuestionId);
+        break;
+    }
   };
 
   componentDidMount() {
-    this.initAnswer();
+    const initAnswer = '';
+    this.selectAnswer(initAnswer, this.state.currentId);
   }
 
   render() {
