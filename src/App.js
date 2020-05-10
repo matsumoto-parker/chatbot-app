@@ -2,6 +2,7 @@ import React from 'react';
 import defaultDataset from './dataset';
 import { AnswersList, Chats } from './components';
 import './assets/styles/App.css';
+import FormDialog from './Forms/FormDialog';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class App extends React.Component {
     };
 
     this.selectAnswer = this.selectAnswer.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   displayNextQuestion = (nextQuestionId) => {
@@ -38,6 +41,11 @@ class App extends React.Component {
           this.displayNextQuestion(nextQuestionId);
         }, 500);
         break;
+
+      case nextQuestionId === 'contact':
+        this.handleClickOpen();
+        break;
+
       case /^https:*/.test(nextQuestionId):
         const a = document.createElement('a');
         a.href = nextQuestionId;
@@ -58,6 +66,14 @@ class App extends React.Component {
         }, 1000);
         break;
     }
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   componentDidMount() {
@@ -81,6 +97,7 @@ class App extends React.Component {
             answers={this.state.answers}
             select={this.selectAnswer}
           />
+          <FormDialog open={this.state.open} handleClose={this.handleClose} />
         </div>
       </section>
     );
