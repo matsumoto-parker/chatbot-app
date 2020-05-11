@@ -9,7 +9,7 @@
       { "content": "学習コミュニティについて知りたい", "nextId": "community" },
       { "content": "お付き合いしたい", "nextId": "dating" }
     ],
-    "question": "こんにちは！🐯トラハックへのご用件はなんでしょうか？"
+    "question": "はじめまして！松本の何が知りたいですか？"
   },
   "job_offer": {
     "answers": [
